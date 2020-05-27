@@ -11,5 +11,4 @@ This application uses:
   * alignItems
   * flexWrap
   * flex
-  * width/height
-  * position
+  * alignContent
