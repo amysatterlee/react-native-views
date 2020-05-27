@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 
 const App: () => React$Node = () => {
@@ -17,17 +17,30 @@ const App: () => React$Node = () => {
     ));
   }
 
+  const handleAdd = () => {
+    let newItems = items.slice();
+    const colorIdx = (newItems.length + 1) % 4;
+    newItems.push({id: newItems.length + 1, color: colors[colorIdx]});
+    setItems(newItems);
+  }
+
+  const handleRemove = () => {
+    let newItems = items.slice();
+    newItems.pop();
+    setItems(newItems);
+  }
+
   return (
     <View style={styles.page}>
       <View style={styles.headerSection}>
-        <Text>This is my Header Text</Text>
+        <Text style={styles.headerText}>Wow! Check Out This Header!</Text>
       </View>
       <View style={styles.mainSection}>
         {getItems()}
       </View>
       <View style={styles.footerSection}>
-        <Button title='Press Me'></Button>
-        <Button title='Or Me'></Button>
+        <Button color='grey' onPress={handleAdd} title='Add'></Button>
+        <Button color='grey' onPress={handleRemove} title='Remove'></Button>
       </View>
     </View>
   );
@@ -36,27 +49,32 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   page: {
     width: '100%',
-    height: '75%'
+    height: '100%'
   },
   headerSection: {
-    flex: 1,
-    backgroundColor: 'lightblue',
+    flex: 0.5,
+    backgroundColor: 'plum',
     justifyContent: 'center',
     alignItems: 'center'
   },
+  headerText: {
+    fontSize: 24,
+    padding: 5
+  },
   mainSection: {
     flex: 4,
-    backgroundColor: 'grey',
+    backgroundColor: 'lightgrey',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     flexWrap: 'wrap',
-    alignContent: 'space-around'
+    alignContent: 'center',
+    justifyContent: 'space-around'
   },
   footerSection: {
-    flex: 1,
-    backgroundColor: 'lightyellow',
+    flex: 0.25,
+    backgroundColor: 'plum',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    padding: 5
   }
 });
 
